@@ -36,6 +36,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.useMSAL = void 0;
+// @ts-ignore
+var vue_1 = require("vue");
 var main_1 = require("./src/main");
 var msalPlugin = /** @class */ (function () {
     function msalPlugin(options) {
@@ -77,8 +80,13 @@ var msalPlugin = /** @class */ (function () {
     }
     msalPlugin.install = function (app, options) {
         app.config.globalProperties.$msal = new msalPlugin(options);
+        app.provide('msal', app.config.globalProperties.$msal);
     };
     return msalPlugin;
 }());
 exports.default = msalPlugin;
+function useMSAL() {
+    return (0, vue_1.inject)('mite');
+}
+exports.useMSAL = useMSAL;
 //# sourceMappingURL=plugin.js.map

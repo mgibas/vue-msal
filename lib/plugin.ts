@@ -1,10 +1,13 @@
 'use strict';
+// @ts-ignore
+import { inject } from 'vue'
 import { Options, MSALBasic } from './src/types';
 import { MSAL } from './src/main';
 
 export default class msalPlugin {
     static install(app: any, options: Options): void {
         app.config.globalProperties.$msal = new msalPlugin(options)
+        app.provide('msal', app.config.globalProperties.$msal)
     }
     constructor(options: Options) {
         const msal = new MSAL(options);
@@ -19,4 +22,8 @@ export default class msalPlugin {
         };
         return exposed;
     }
+}
+
+export function useMSAL () {
+  return inject('mite')
 }
