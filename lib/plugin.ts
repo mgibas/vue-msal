@@ -25,5 +25,5 @@ export default class msalPlugin {
 }
 
 export function useMSAL () {
-  return inject('mite')
+  return inject('msal')
 }

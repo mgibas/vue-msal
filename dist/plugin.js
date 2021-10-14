@@ -86,7 +86,7 @@ var msalPlugin = /** @class */ (function () {
 }());
 exports.default = msalPlugin;
 function useMSAL() {
-    return (0, vue_1.inject)('mite');
+    return (0, vue_1.inject)('msal');
 }
 exports.useMSAL = useMSAL;
 //# sourceMappingURL=plugin.js.map
