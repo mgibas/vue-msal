@@ -125,7 +125,7 @@ export class MSAL implements MSALBasic {
             const response = await this.lib.acquireTokenSilent(request);
             this.handleTokenResponse(null, response);
             return response;
-        } catch (error) {
+        } catch (error: any) {
             // Upon acquireTokenSilent failure (due to consent or interaction or login required ONLY)
             // Call acquireTokenRedirect
             if (this.requiresInteraction(error.errorCode)) {
@@ -246,7 +246,7 @@ export class MSAL implements MSALBasic {
     }
     private async executeBatchRequest(endpoints: Array<string | GraphDetailedObject>, batchUrl = this.graph.baseUrl) {
         const requests = endpoints.map((endpoint, index) => this.createRequest(endpoint, index));
-        const {data} = await axios.request({
+        const {data}: {data: any} = await axios.request({
             url: `${batchUrl}/$batch`,
             method: 'POST' as Method,
             data: {requests: requests},
@@ -391,7 +391,7 @@ export class MSAL implements MSALBasic {
                         return cb.id === currentCb.id;
                     });
                     this.storeCallbackQueue();
-                } catch (e) {
+                } catch (e: any) {
                     console.warn(`Callback '${cb.id}' failed with error: `, e.message);
                 }
             }

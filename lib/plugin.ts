@@ -1,18 +1,13 @@
 'use strict';
 import { Options, MSALBasic } from './src/types';
 import { MSAL } from './src/main';
-import { mixin } from "./mixin";
-export const msalMixin = mixin;
 
 export default class msalPlugin {
-    static install(Vue: any, options: Options): void {
-        Vue.prototype.$msal = new msalPlugin(options, Vue);
+    static install(app: any, options: Options): void {
+        app.config.globalProperties.$msal = new msalPlugin(options)
     }
-    constructor(options: Options, Vue: any = undefined) {
+    constructor(options: Options) {
         const msal = new MSAL(options);
-        if (Vue && options.framework && options.framework.globalMixin) {
-            Vue.mixin(mixin);
-        }
         const exposed: MSALBasic = {
             data: msal.data,
             signIn() { msal.signIn(); },
